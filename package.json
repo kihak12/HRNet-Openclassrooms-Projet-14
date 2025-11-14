@@ -9,7 +9,6 @@
     "lint": "eslint .",
     "preview": "vite preview"
   },
-  "homepage": "https://kihak12.github.io/HRNet-Openclassrooms-Projet-14",
   "dependencies": {
     "data-table-module-kihak12": "^1.0.6",
     "date-picker-module-kihak12": "^1.0.6",
