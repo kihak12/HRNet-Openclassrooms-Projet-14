@@ -43,7 +43,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           # On upload uniquement le dossier build généré par React
-          path: './build'
+          path: './dist'
 
       - name: Deploy to GitHub Pages
         id: deployment
