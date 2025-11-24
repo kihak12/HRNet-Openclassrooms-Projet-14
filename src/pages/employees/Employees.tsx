@@ -19,6 +19,7 @@ export const Employees = () => {
         city: item.address.city,
         state: item.address.state,
         zipCode: item.address.zipCode,
+        department:  item.department,
     }))
 
 

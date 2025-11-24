@@ -25,7 +25,17 @@ export const Home = () => {
     const addressStatesList: AddressState[] = addressStates;
     const addressStatesListAsSelectOptions: SelectOption[] = addressStatesList.map(addressState => ({ key: addressState.abbreviation, label: addressState.name }));
 
+    const departmentListAsSelectOptions: SelectOption[] = [
+        {key: 'sales', label: 'Sales'},
+        {key: 'marketing', label: 'Marketing'},
+        {key: 'engineering', label: 'Engineering'},
+        {key: 'human-resources', label: 'Human Resources'},
+        {key: 'legal', label: 'Legal'}
+    ];
+
     const [state, setState] = useState(addressStatesList[0].abbreviation);
+
+    const [department, setDepartment] = useState(departmentListAsSelectOptions[0].key);
 
     const [zipCode, setZipCode] = useState('');
 
@@ -36,14 +46,15 @@ export const Home = () => {
         const data: Employee = {
             firstName,
             lastName,
-            dateOfBirth: dateOfBirth.toISOString().split('T')[0], // Format as YYYY-MM-DD
-            startDate: startDate.toISOString(), // Include time information
+            dateOfBirth: dateOfBirth.toISOString().split('T')[0],
+            startDate: startDate.toISOString().split('T')[0],
             address: {
                 street,
                 city,
                 state,
                 zipCode
-            }
+            },
+            department
         };
         const stored = localStorage.getItem('employees');
         const employees: Employee[] = stored ? JSON.parse(stored) : [];
@@ -147,10 +158,24 @@ export const Home = () => {
                                 required
                             />
                         </div>
+                        <div className={styles.formGroup}>
+                            <label htmlFor="department" className={styles.label}>Department</label>
+                            <SelectComponent
+                                name={"department"}
+                                options={departmentListAsSelectOptions}
+                                selectedOption={departmentListAsSelectOptions.find(e => e.key === department)!}
+                                onSelect={option => setDepartment(option.key)}
+                            />
+                        </div>
                     </div>
                     <button type="submit" className={styles.submitButton}>Submit</button>
                 </form>
-                {isModalOpen && <ModalComponent onClose={() => setIsModalOpen(false)} title={'Employee Created!'} showCancelButton={false} onConfirm={() => setIsModalOpen(false)} />}
+                {isModalOpen && <ModalComponent
+                    onClose={() => setIsModalOpen(false)}
+                    title={'Employee Created!'}
+                    showCancelButton={false}
+                    onConfirm={() => setIsModalOpen(false)}
+                />}
             </div>
         </div>
     )

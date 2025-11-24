@@ -9,4 +9,5 @@ export interface Employee {
         state: string;
         zipCode: string;
     }
+    department: string;
 }
